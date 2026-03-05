@@ -7,10 +7,30 @@ function App() {
   const [categoriaActual, setCategoriaActual] = useState(null);
 
   const database = {
-    primero: { titulo: 'PRIMEROS', opciones: [{ nombre: 'Alitas BBQ', precio: 12.50 }] },
-    segundo: { titulo: 'ENSALADAS', opciones: [{ nombre: 'Ensalada César', precio: 11.50 }] },
-    postres: { titulo: 'POSTRES', opciones: [{ nombre: 'Tarta de Queso', precio: 5.90 }] },
-    otras: { titulo: 'OTRAS', opciones: [{ nombre: 'Combo', precio: 24.90 }] }
+    primero: {
+      titulo: 'COMPLEMENTOS',
+      icono: '🍟',
+      imagenes: ['/imagenes/complementos/foto1.png', '/imagenes/complementos/foto2.png'], // Ajusta nombres reales
+      opciones: [{ nombre: 'Patatas Bravas', precio: 6.50 }, { nombre: 'Croquetas Caseras', precio: 8.00 }]
+    },
+    segundo: {
+      titulo: 'ENSALADAS',
+      icono: '🥗',
+      imagenes: ['/imagenes/ensaladas/foto1.png', '/imagenes/ensaladas/foto2.png'],
+      opciones: [{ nombre: 'Ensalada César', precio: 11.50 }, { nombre: 'Ensalada Caprese', precio: 9.90 }]
+    },
+    postres: {
+      titulo: 'BEBIDAS',
+      icono: '🥤',
+      imagenes: ['/imagenes/bebidas/foto1.png', '/imagenes/bebidas/foto2.png'],
+      opciones: [{ nombre: 'Cerveza Artesana', precio: 3.50 }, { nombre: 'Refresco', precio: 2.50 }]
+    },
+    otras: {
+      titulo: 'PIZZAS',
+      icono: '🍕',
+      imagenes: ['/imagenes/pizzas/foto1.png', '/imagenes/pizzas/foto2.png'],
+      opciones: [{ nombre: 'Pizza Margarita', precio: 12.00 }, { nombre: 'Pizza Carbonara', precio: 14.50 }]
+    }
   };
 
   const handleSelectCategory = (categoria) => {
@@ -25,10 +45,13 @@ function App() {
       ) : (
         <CategoriaScreen2
           titulo={database[categoriaActual]?.titulo || 'CATEGORÍA'}
+          icono={database[categoriaActual]?.icono || '🔥'}
+          imagenes={database[categoriaActual]?.imagenes || []}
           opciones={database[categoriaActual]?.opciones || []}
         />
       )}
     </div>
   );
 }
+
 export default App;
