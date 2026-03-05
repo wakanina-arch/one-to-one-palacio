@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Carrusel = ({ imagenes, autoPlay = true, intervalo = 3000 }) => {
+export default function Carrusel({ imagenes, autoPlay = true, intervalo = 3000 }) {
   const [indice, setIndice] = useState(0);
 
   useEffect(() => {
@@ -11,18 +11,19 @@ const Carrusel = ({ imagenes, autoPlay = true, intervalo = 3000 }) => {
     return () => clearInterval(tick);
   }, [autoPlay, intervalo, imagenes]);
 
-  if (!imagenes || imagenes.length === 0) return null;
+  if (!imagenes || imagenes.length === 0) return <div style={{height: '100%', color: 'gray', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>No hay fotos</div>;
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', backgroundColor: '#000', overflow: 'hidden' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', backgroundColor: '#000' }}>
       <img 
         src={imagenes[indice]} 
         alt="Plato" 
-        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} 
-        onError={(e) => e.target.src = 'https://via.placeholder.com...'}
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+        onError={(e) => {
+          console.error("Error en:", imagenes[indice]);
+          e.target.style.display = 'none';
+        }}
       />
     </div>
   );
-};
-
-export default Carrusel;
+}

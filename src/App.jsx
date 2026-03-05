@@ -8,17 +8,41 @@ function App() {
 
   const database = {
     primero: { 
-      titulo: 'COMPLEMENTOS', icono: '🍟', folder: 'complementos',
-      platos: [
-        { id: 1, nombre: 'Patatas Bravas', precio: 6.50, kcal: 450 },
-        { id: 2, nombre: 'Croquetas Caseras', precio: 8.50, kcal: 320 }
-      ]
+      titulo: 'COMPLEMENTOS', icono: '🍟', 
+      imagenes: ['/imagenes/complementos/foto1.jpg'],
+      platos: [{ id: 1, nombre: 'Patatas Bravas', precio: 6.50, kcal: 450 }]
     },
     segundo: { 
-      titulo: 'ENSALADAS', icono: '🥗', folder: 'ensaladas',
+      titulo: 'ENSALADAS', icono: '🥗', 
+      imagenes: ['/imagenes/ensaladas/ensalada1.jpg'],
+      platos: [{ id: 3, nombre: 'Ensalada César', precio: 11.50, kcal: 580 }]
+    },
+    postres: { 
+      titulo: 'POSTRES', icono: '🥤', 
+      imagenes: [
+        '/imagenes/postres/AguaMineral.jpg', '/imagenes/postres/CervezaClub.jpg', 
+        '/imagenes/postres/CervezaGuinness.jpg', '/imagenes/postres/CervezaHeineken.jpg', 
+        '/imagenes/postres/CocaCola.jpg', '/imagenes/postres/Fanta.jpg', 
+        '/imagenes/postres/Guarana.jpg', '/imagenes/postres/Pepsi.jpg', 
+        '/imagenes/postres/ZumoDeFrutas.jpg'
+      ],
       platos: [
-        { id: 3, nombre: 'Ensalada César', precio: 11.50, kcal: 580 },
-        { id: 4, nombre: 'Ensalada Caprese', precio: 10.90, kcal: 410 }
+        { id: 6, nombre: 'Refrescos Variados', precio: 2.50, kcal: 140 },
+        { id: 7, nombre: 'Cerveza Importación', precio: 3.50, kcal: 155 }
+      ]
+    },
+    otras: { 
+      titulo: 'OTRAS', icono: '🍕', 
+      imagenes: [
+        '/imagenes/otras/Carbonara.jpg', '/imagenes/otras/Champiñones.jpg', 
+        '/imagenes/otras/Cuatro Quesos.jpg', '/imagenes/otras/Hawaiana.jpg', 
+        '/imagenes/otras/Margherita.jpg', '/imagenes/otras/Marinera.jpg', 
+        '/imagenes/otras/Napolitana.jpg', '/imagenes/otras/Pepperoni.jpg', 
+        '/imagenes/otras/Rústica.jpg'
+      ],
+      platos: [
+        { id: 8, nombre: 'Pizza Margarita', precio: 12.00, kcal: 850 },
+        { id: 9, nombre: 'Pizza Especial', precio: 14.50, kcal: 920 }
       ]
     }
   };
