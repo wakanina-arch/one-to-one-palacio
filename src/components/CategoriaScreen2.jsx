@@ -1,93 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Carrusel from './Carrusel';
 
 export default function CategoriaScreen2({ categoria, onBack }) {
+  const [seleccionados, setSeleccionados] = useState({});
+
   if (!categoria) return null;
 
-  // Mapeo real de imágenes según la carpeta que definimos en App.jsx
-  // Esto busca archivos ensalada1.jpg, ensalada2.jpg... en sus carpetas
-  const rutasImagenes = [
-    `/imagenes/${categoria.folder}/ensalada1.jpg`,
-    `/imagenes/${categoria.folder}/ensalada2.jpg`,
-    `/imagenes/${categoria.folder}/ensalada3.jpg`
-  ];
+  // Generar rutas dinámicas (intentamos cargar hasta 5 fotos por carpeta)
+  const rutasImagenes = [1,2,3,4,5].map(n => `/imagenes/${categoria.folder}/ensalada${n}.jpg`);
+
+  const togglePlato = (id) => {
+    setSeleccionados(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
   return (
-    <div style={{ 
-      background: '#0a0a0a', 
-      minHeight: '100dvh', 
-      color: 'white', 
-      display: 'flex', 
-      flexDirection: 'column',
-      width: '100vw'
-    }}>
-      {/* Header Fijo */}
-      <header style={{ 
-        padding: '20px', 
-        textAlign: 'center', 
-        background: 'linear-gradient(to bottom, #8B0000, #0a0a0a)',
-        borderBottom: '1px solid #FFD700'
-      }}>
-        <h1 style={{ fontSize: '1.8rem', margin: 0, letterSpacing: '1px', textTransform: 'uppercase' }}>
-          {categoria.icono} {categoria.titulo}
-        </h1>
+    <div style={{ background: '#0a0a0a', minHeight: '100dvh', color: 'white', width: '100vw', display: 'flex', flexDirection: 'column' }}>
+      <header style={{ padding: '15px', textAlign: 'center', background: 'linear-gradient(to bottom, #8B0000, #0a0a0a)', borderBottom: '1px solid #FFD700' }}>
+        <h1 style={{ fontSize: '1.5rem', margin: 0 }}>{categoria.icono} {categoria.titulo}</h1>
       </header>
 
-      {/* Contenedor del Carrusel (Ajustado para que no se corte) */}
-      <div style={{ width: '100%', height: '280px', flexShrink: 0 }}>
-        <Carrusel imagenes={rutasImagenes} autoPlay={true} intervalo={3500} />
+      <div style={{ width: '100%', height: '220px', flexShrink: 0 }}>
+        <Carrusel imagenes={rutasImagenes} autoPlay={true} />
       </div>
 
-      {/* Lista de Platos Dinámica */}
-      <div style={{ 
-        flex: 1, 
-        padding: '20px', 
-        overflowY: 'auto', 
-        paddingBottom: '100px',
-        background: 'rgba(255,255,255,0.02)' 
-      }}>
-        {categoria.platos?.map((plato, i) => (
-          <div key={i} style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            padding: '15px 0', 
-            borderBottom: '1px solid #333',
-            alignItems: 'center'
+      <div style={{ flex: 1, padding: '15px', overflowY: 'auto', paddingBottom: '100px' }}>
+        {categoria.platos?.map((plato) => (
+          <div key={plato.id} style={{ 
+            display: 'flex', alignItems: 'center', padding: '15px', marginBottom: '10px',
+            background: 'rgba(255,255,255,0.05)', borderRadius: '12px', border: seleccionados[plato.id] ? '1px solid #FFD700' : '1px solid #333'
           }}>
-            <span style={{ fontSize: '1.1rem', fontWeight: '500' }}>{plato.nombre}</span>
-            <span style={{ 
-              color: '#FFD700', 
-              fontWeight: 'bold', 
-              fontSize: '1rem',
-              padding: '5px 12px',
-              border: '1px solid #FFD70066',
-              borderRadius: '20px'
-            }}>
-              ${plato.precio.toFixed(2)}
-            </span>
+            <input 
+              type="checkbox" 
+              checked={!!seleccionados[plato.id]} 
+              onChange={() => togglePlato(plato.id)}
+              style={{ width: '20px', height: '20px', marginRight: '15px', accentColor: '#FFD700' }}
+            />
+            <div style={{ flex: 1 }}>
+              <div style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{plato.nombre}</div>
+              <div style={{ fontSize: '0.8rem', color: '#aaa' }}>🔥 {plato.kcal} kcal</div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ color: '#FFD700', fontWeight: 'bold' }}>${plato.precio.toFixed(2)}</div>
+              <button 
+                onClick={() => alert('Añadido: ' + plato.nombre)}
+                style={{ background: '#FF4500', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '5px', marginTop: '5px', fontSize: '0.7rem' }}
+              >
+                AÑADIR +
+              </button>
+            </div>
           </div>
-        )) || <p style={{textAlign: 'center', opacity: 0.5}}>Cargando menú...</p>}
+        ))}
       </div>
 
-      {/* Botón Volver con Feedback Visual */}
-      <button 
-        onClick={onBack} 
-        style={{ 
-          position: 'fixed', 
-          bottom: 0, 
-          width: '100%', 
-          padding: '20px', 
-          background: '#8B0000', 
-          color: 'white', 
-          border: 'none', 
-          fontWeight: 'bold', 
-          fontSize: '1.2rem',
-          zIndex: 100,
-          boxShadow: '0 -5px 20px rgba(0,0,0,0.8)',
-          cursor: 'pointer'
-        }}
-      >
-        VOLVER AL INICIO
+      <button onClick={onBack} style={{ position: 'fixed', bottom: 0, width: '100%', padding: '20px', background: '#8B0000', color: 'white', border: 'none', fontWeight: 'bold', fontSize: '1.2rem', zIndex: 100 }}>
+        ⬅ VOLVER
       </button>
     </div>
   );

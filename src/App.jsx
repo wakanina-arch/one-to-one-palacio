@@ -8,43 +8,17 @@ function App() {
 
   const database = {
     primero: { 
-      titulo: 'COMPLEMENTOS', 
-      icono: '🍟', 
-      folder: 'complementos',
+      titulo: 'COMPLEMENTOS', icono: '🍟', folder: 'complementos',
       platos: [
-        { nombre: 'Patatas Bravas', precio: 6.50 },
-        { nombre: 'Croquetas Caseras', precio: 8.50 },
-        { nombre: 'Alitas de Pollo', precio: 9.00 }
+        { id: 1, nombre: 'Patatas Bravas', precio: 6.50, kcal: 450 },
+        { id: 2, nombre: 'Croquetas Caseras', precio: 8.50, kcal: 320 }
       ]
     },
     segundo: { 
-      titulo: 'ENSALADAS', 
-      icono: '🥗', 
-      folder: 'ensaladas',
+      titulo: 'ENSALADAS', icono: '🥗', folder: 'ensaladas',
       platos: [
-        { nombre: 'Ensalada César', precio: 11.50 },
-        { nombre: 'Ensalada Caprese', precio: 10.90 },
-        { nombre: 'Ensalada Mixta', precio: 9.50 }
-      ]
-    },
-    postres: { 
-      titulo: 'BEBIDAS', 
-      icono: '🥤', 
-      folder: 'bebidas',
-      platos: [
-        { nombre: 'Cerveza Nacional', precio: 3.50 },
-        { nombre: 'Copa de Vino', precio: 4.00 },
-        { nombre: 'Refrescos', precio: 2.50 }
-      ]
-    },
-    otras: { 
-      titulo: 'PIZZAS', 
-      icono: '🍕', 
-      folder: 'pizzas',
-      platos: [
-        { nombre: 'Margarita', precio: 12.00 },
-        { nombre: 'Carbonara', precio: 14.50 },
-        { nombre: 'Cuatro Quesos', precio: 13.90 }
+        { id: 3, nombre: 'Ensalada César', precio: 11.50, kcal: 580 },
+        { id: 4, nombre: 'Ensalada Caprese', precio: 10.90, kcal: 410 }
       ]
     }
   };
@@ -67,5 +41,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
